@@ -4,6 +4,10 @@ module Admin
 
     def index
       scope = Post.ordered.includes(:post_category)
+      if params[:q].present?
+        q = "%#{params[:q].strip}%"
+        scope = scope.where("title->>'pl' ILIKE :q OR title->>'en' ILIKE :q OR title->>'de' ILIKE :q", q: q)
+      end
       scope = scope.where(post_category_id: params[:category_id]) if params[:category_id].present?
       scope = scope.where(status: params[:status]) if Post.statuses.key?(params[:status])
       @posts = paginate(scope)

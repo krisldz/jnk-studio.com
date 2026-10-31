@@ -4,6 +4,10 @@ module Admin
 
     def index
       scope = Project.ordered.includes(:category)
+      if params[:q].present?
+        q = "%#{params[:q].strip}%"
+        scope = scope.where("title->>'pl' ILIKE :q OR title->>'en' ILIKE :q OR title->>'de' ILIKE :q", q: q)
+      end
       scope = scope.where(category_id: params[:category_id]) if params[:category_id].present?
       scope = scope.where(status: params[:status]) if Project.statuses.key?(params[:status])
       scope = scope.where(featured: true) if params[:featured].present?

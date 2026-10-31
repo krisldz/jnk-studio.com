@@ -4,6 +4,11 @@
   <div class="filters-head mono">Filtry</div>
   <form method="get" action="<%= request.path %>" class="filters-form">
     <div class="field">
+      <label>Szukaj w tytule</label>
+      <input type="search" name="q" value="<%= params[:q] %>" placeholder="Fraza…" />
+    </div>
+
+    <div class="field">
       <label>Kategoria</label>
       <select name="category_id">
         <option value="">— wszystkie —</option>

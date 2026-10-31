@@ -316,6 +316,7 @@ a {
 .field input[type='number'],
 .field input[type='email'],
 .field input[type='password'],
+.field input[type='search'],
 .field textarea,
 .field select {
   width: 100%;
