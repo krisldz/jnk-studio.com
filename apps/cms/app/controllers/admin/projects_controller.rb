@@ -3,7 +3,12 @@ module Admin
     before_action :set_project, only: %i[edit update destroy publish]
 
     def index
-      @projects = Project.ordered.includes(:category)
+      scope = Project.ordered.includes(:category)
+      scope = scope.where(category_id: params[:category_id]) if params[:category_id].present?
+      scope = scope.where(status: params[:status]) if Project.statuses.key?(params[:status])
+      scope = scope.where(featured: true) if params[:featured].present?
+      @projects = paginate(scope)
+      @categories = Category.ordered
     end
 
     def new

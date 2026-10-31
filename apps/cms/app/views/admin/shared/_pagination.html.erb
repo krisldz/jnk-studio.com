@@ -1,0 +1,17 @@
+<% if @total_pages && @total_pages > 1 %>
+  <nav class="pagination mono" aria-label="Paginacja">
+    <% if @page > 1 %>
+      <%= link_to "‹ Poprzednia", "#{request.path}?#{request.query_parameters.merge('page' => @page - 1).to_query}", class: "page-link" %>
+    <% else %>
+      <span class="page-link disabled">‹ Poprzednia</span>
+    <% end %>
+
+    <span class="page-info">Strona <%= @page %> z <%= @total_pages %> · <%= @total_count %> poz.</span>
+
+    <% if @page < @total_pages %>
+      <%= link_to "Następna ›", "#{request.path}?#{request.query_parameters.merge('page' => @page + 1).to_query}", class: "page-link" %>
+    <% else %>
+      <span class="page-link disabled">Następna ›</span>
+    <% end %>
+  </nav>
+<% end %>

@@ -8,6 +8,9 @@
   <%= link_to "Nowy wpis", new_admin_post_path, class: "btn btn-accent" %>
 </div>
 
+<div class="list-layout">
+  <%= render "admin/shared/filters", categories: @post_categories, statuses: Post.statuses.keys %>
+  <div class="list-main">
 <% if @posts.any? %>
   <table class="table">
     <thead>
@@ -51,6 +54,9 @@
       <% end %>
     </tbody>
   </table>
+  <%= render "admin/shared/pagination" %>
 <% else %>
-  <div class="empty">Brak wpisów. <%= link_to "Dodaj pierwszy", new_admin_post_path %>.</div>
+  <div class="empty">Brak wpisów dla wybranych kryteriów. <%= link_to "Wyczyść filtry", admin_posts_path %>.</div>
 <% end %>
+  </div>
+</div>

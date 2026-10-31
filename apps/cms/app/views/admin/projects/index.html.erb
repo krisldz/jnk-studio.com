@@ -8,6 +8,9 @@
   <%= link_to "Nowa realizacja", new_admin_project_path, class: "btn btn-accent" %>
 </div>
 
+<div class="list-layout">
+  <%= render "admin/shared/filters", categories: @categories, statuses: Project.statuses.keys, show_featured: true %>
+  <div class="list-main">
 <% if @projects.any? %>
   <table class="table">
     <thead>
@@ -51,6 +54,9 @@
       <% end %>
     </tbody>
   </table>
+  <%= render "admin/shared/pagination" %>
 <% else %>
-  <div class="empty">Brak realizacji. <%= link_to "Dodaj pierwszą", new_admin_project_path %>.</div>
+  <div class="empty">Brak realizacji dla wybranych kryteriów. <%= link_to "Wyczyść filtry", admin_projects_path %>.</div>
 <% end %>
+  </div>
+</div>

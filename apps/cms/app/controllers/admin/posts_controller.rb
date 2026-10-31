@@ -3,7 +3,11 @@ module Admin
     before_action :set_post, only: %i[edit update destroy publish]
 
     def index
-      @posts = Post.ordered.includes(:post_category)
+      scope = Post.ordered.includes(:post_category)
+      scope = scope.where(post_category_id: params[:category_id]) if params[:category_id].present?
+      scope = scope.where(status: params[:status]) if Post.statuses.key?(params[:status])
+      @posts = paginate(scope)
+      @post_categories = PostCategory.ordered
     end
 
     def new

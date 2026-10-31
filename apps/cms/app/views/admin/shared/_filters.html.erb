@@ -1,0 +1,40 @@
+<%# Sidebar z filtrami listy. Locals: categories, statuses, show_featured (opcj.) %>
+<% status_labels = { "draft" => "Szkic", "published" => "Opublikowany", "archived" => "Zarchiwizowany" } %>
+<aside class="filters">
+  <div class="filters-head mono">Filtry</div>
+  <form method="get" action="<%= request.path %>" class="filters-form">
+    <div class="field">
+      <label>Kategoria</label>
+      <select name="category_id">
+        <option value="">— wszystkie —</option>
+        <% categories.each do |c| %>
+          <option value="<%= c.id %>" <%= "selected" if params[:category_id].to_s == c.id.to_s %>><%= c.name(:pl) %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Status</label>
+      <select name="status">
+        <option value="">— wszystkie —</option>
+        <% statuses.each do |s| %>
+          <option value="<%= s %>" <%= "selected" if params[:status] == s %>><%= status_labels[s] || s %></option>
+        <% end %>
+      </select>
+    </div>
+
+    <% if local_assigns[:show_featured] %>
+      <div class="field">
+        <label class="checkbox-inline mono">
+          <%= check_box_tag "featured", "1", params[:featured].present? %>
+          Tylko wyróżnione
+        </label>
+      </div>
+    <% end %>
+
+    <div class="filters-actions">
+      <button type="submit" class="btn btn-accent btn-sm">Filtruj</button>
+      <%= link_to "Wyczyść", request.path, class: "btn btn-sm" %>
+    </div>
+  </form>
+</aside>
