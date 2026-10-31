@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_31_190000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -48,6 +48,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
+    t.index ["legacy_id"], name: "index_categories_on_legacy_id", unique: true
     t.index ["position"], name: "index_categories_on_position"
   end
 
@@ -73,6 +75,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
+    t.index ["legacy_id"], name: "index_post_categories_on_legacy_id", unique: true
     t.index ["position"], name: "index_post_categories_on_position"
   end
 
@@ -90,7 +94,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
     t.index ["featured"], name: "index_posts_on_featured"
+    t.index ["legacy_id"], name: "index_posts_on_legacy_id", unique: true
     t.index ["position"], name: "index_posts_on_position"
     t.index ["post_category_id"], name: "index_posts_on_post_category_id"
     t.index ["published_at"], name: "index_posts_on_published_at"
@@ -105,6 +111,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
+    t.index ["legacy_id"], name: "index_project_images_on_legacy_id", unique: true
     t.index ["project_id", "position"], name: "index_project_images_on_project_id_and_position"
     t.index ["project_id"], name: "index_project_images_on_project_id"
   end
@@ -124,8 +132,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
     t.datetime "published_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "legacy_id"
     t.index ["category_id"], name: "index_projects_on_category_id"
     t.index ["featured"], name: "index_projects_on_featured"
+    t.index ["legacy_id"], name: "index_projects_on_legacy_id", unique: true
     t.index ["position"], name: "index_projects_on_position"
     t.index ["slug"], name: "index_projects_on_slug", using: :gin
     t.index ["status"], name: "index_projects_on_status"
