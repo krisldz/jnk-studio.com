@@ -1,4 +1,6 @@
-<%= form_with model: [:admin, category], class: "form" do |f| %>
+<%= form_with model: [:admin, category], class: "form lang-pl" do |f| %>
+  <%= render "admin/shared/lang_tabs" %>
+
   <% if category.errors.any? %>
     <div class="errors">
       <strong><%= pluralize(category.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>

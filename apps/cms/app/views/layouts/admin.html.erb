@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trix@2.1.15/dist/trix.min.css">
     <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
@@ -20,10 +21,22 @@
         <a href="<%= admin_root_path %>" class="brand">JNK&nbsp;Studio <span>/ CMS</span></a>
         <nav class="topnav mono">
           <a href="<%= admin_root_path %>" class="<%= request.path == admin_root_path ? 'active' : '' %>">Pulpit</a>
-          <a href="<%= admin_projects_path %>" class="<%= nav.call(admin_projects_path) %>">Realizacje</a>
-          <a href="<%= admin_categories_path %>" class="<%= nav.call(admin_categories_path) %>">Kategorie</a>
-          <a href="<%= admin_posts_path %>" class="<%= nav.call(admin_posts_path) %>">Blog</a>
-          <a href="<%= admin_post_categories_path %>" class="<%= nav.call(admin_post_categories_path) %>">Kategorie bloga</a>
+          <% proj_active = nav.call(admin_projects_path).present? || nav.call(admin_categories_path).present? %>
+          <div class="navgroup">
+            <a href="<%= admin_projects_path %>" class="navgroup-label <%= "active" if proj_active %>" aria-haspopup="true">Realizacje ▾</a>
+            <div class="navgroup-menu">
+              <a href="<%= admin_projects_path %>" class="<%= nav.call(admin_projects_path) %>">Realizacje</a>
+              <a href="<%= admin_categories_path %>" class="<%= nav.call(admin_categories_path) %>">Kategorie</a>
+            </div>
+          </div>
+          <% blog_active = nav.call(admin_posts_path).present? || nav.call(admin_post_categories_path).present? %>
+          <div class="navgroup">
+            <a href="<%= admin_posts_path %>" class="navgroup-label <%= "active" if blog_active %>" aria-haspopup="true">Blog ▾</a>
+            <div class="navgroup-menu">
+              <a href="<%= admin_posts_path %>" class="<%= nav.call(admin_posts_path) %>">Wpisy</a>
+              <a href="<%= admin_post_categories_path %>" class="<%= nav.call(admin_post_categories_path) %>">Kategorie</a>
+            </div>
+          </div>
           <a href="<%= admin_inquiries_path %>" class="<%= nav.call(admin_inquiries_path) %>">Zapytania</a>
         </nav>
         <div class="topbar-right">

@@ -1,4 +1,6 @@
-<%= form_with model: [:admin, post_category], url: (post_category.persisted? ? admin_post_category_path(post_category) : admin_post_categories_path), class: "form" do |f| %>
+<%= form_with model: [:admin, post_category], url: (post_category.persisted? ? admin_post_category_path(post_category) : admin_post_categories_path), class: "form lang-pl" do |f| %>
+  <%= render "admin/shared/lang_tabs" %>
+
   <% if post_category.errors.any? %>
     <div class="errors">
       <strong><%= pluralize(post_category.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>

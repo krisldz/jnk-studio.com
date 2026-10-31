@@ -1,4 +1,6 @@
-<%= form_with model: [:admin, project], class: "form" do |f| %>
+<%= form_with model: [:admin, project], class: "form lang-pl" do |f| %>
+  <%= render "admin/shared/lang_tabs" %>
+
   <% if project.errors.any? %>
     <div class="errors">
       <strong><%= pluralize(project.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>
@@ -65,20 +67,11 @@
   </div>
 
   <div class="field">
-    <label>Treść (HTML)</label>
+    <label>Treść</label>
     <div class="lang-pair">
-      <div class="field">
-        <span class="lang-tag">PL · wymagane</span>
-        <%= f.text_area :body_pl, value: project.body_pl, rows: 8 %>
-      </div>
-      <div class="field">
-        <span class="lang-tag">EN</span>
-        <%= f.text_area :body_en, value: project.body_en, rows: 8 %>
-      </div>
-      <div class="field">
-        <span class="lang-tag">DE</span>
-        <%= f.text_area :body_de, value: project.body_de, rows: 8 %>
-      </div>
+      <%= render "admin/shared/trix_field", form: f, attr: :body_pl, tag: "PL · wymagane", value: project.body_pl %>
+      <%= render "admin/shared/trix_field", form: f, attr: :body_en, tag: "EN", value: project.body_en %>
+      <%= render "admin/shared/trix_field", form: f, attr: :body_de, tag: "DE", value: project.body_de %>
     </div>
   </div>
 
