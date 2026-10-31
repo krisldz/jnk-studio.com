@@ -1,0 +1,12 @@
+Nowe zapytanie z formularza
+===========================
+
+Imię i nazwisko: <%= @inquiry.name %>
+E-mail:          <%= @inquiry.email %>
+Telefon:         <%= @inquiry.phone.presence || "—" %>
+Lokalizacja:     <%= @inquiry.place.presence || "—" %>
+Rodzaj:          <%= @inquiry.inquiry_type.presence || "—" %>
+Język:           <%= @inquiry.locale %>
+
+Wiadomość:
+<%= @inquiry.message.presence || "(brak treści)" %>

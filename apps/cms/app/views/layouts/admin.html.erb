@@ -22,6 +22,7 @@
           <a href="<%= admin_root_path %>" class="<%= request.path == admin_root_path ? 'active' : '' %>">Pulpit</a>
           <a href="<%= admin_projects_path %>" class="<%= nav.call(admin_projects_path) %>">Realizacje</a>
           <a href="<%= admin_categories_path %>" class="<%= nav.call(admin_categories_path) %>">Kategorie</a>
+          <a href="<%= admin_inquiries_path %>" class="<%= nav.call(admin_inquiries_path) %>">Zapytania</a>
         </nav>
         <div class="topbar-right">
           <% if current_user %>

@@ -22,3 +22,44 @@ export const getProjects = (fetchFn: FetchFn, locale: Locale) =>
 
 export const getProject = (fetchFn: FetchFn, slug: string, locale: Locale) =>
 	apiGet<ProjectDetail>(fetchFn, `/projects/${encodeURIComponent(slug)}`, locale);
+
+export interface InquiryInput {
+	name: string;
+	email: string;
+	phone?: string;
+	place?: string;
+	inquiry_type?: string;
+	message?: string;
+	consent: boolean;
+}
+
+export type InquiryResult =
+	{ ok: true; id: number } | { ok: false; errors: Record<string, string[]> };
+
+// POST /api/v1/inquiries — zapis zapytania z formularza kontaktowego.
+// 201 → ok; 422 → błędy walidacji; inny status → wyjątek (obsłuż w akcji).
+export async function createInquiry(
+	fetchFn: FetchFn,
+	locale: Locale,
+	input: InquiryInput
+): Promise<InquiryResult> {
+	const url = new URL(`${API_INTERNAL_URL}/inquiries`);
+	url.searchParams.set('locale', locale);
+
+	const headers: Record<string, string> = {
+		'Content-Type': 'application/json',
+		Accept: 'application/json'
+	};
+	if (API_TOKEN) headers.Authorization = `Bearer ${API_TOKEN}`;
+
+	const res = await fetchFn(url, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify({ inquiry: input })
+	});
+
+	if (res.status === 201 || res.status === 422) {
+		return (await res.json()) as InquiryResult;
+	}
+	throw new Error(`Rails API /inquiries → ${res.status}`);
+}

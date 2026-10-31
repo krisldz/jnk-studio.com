@@ -44,7 +44,7 @@
 			<span>{m.about_kicker()}</span>
 		</div>
 		<h1
-			class="m-0 mb-16 text-6xl font-extrabold uppercase lg:text-[9vw]"
+			class="m-0 mb-16 text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[9vw]"
 			style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 		>
 			{m.about_hero_1()}<br /><span class="hl">{m.about_hero_mark()}</span><br />{m.about_hero_2()}
@@ -83,7 +83,7 @@
 			{m.about_values_kicker()}
 		</div>
 		<h2
-			class="m-0 mb-16 text-5xl font-extrabold uppercase lg:text-8xl"
+			class="m-0 mb-16 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-8xl"
 			style="font-stretch:125%; letter-spacing:-0.03em; line-height:.92"
 		>
 			{m.about_values_title()}
@@ -121,7 +121,7 @@
 					{m.about_team_kicker()}
 				</div>
 				<h2
-					class="lines m-0 text-5xl font-extrabold uppercase lg:text-8xl"
+					class="lines m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-8xl"
 					style="font-stretch:125%; letter-spacing:-0.03em; line-height:.92"
 				>
 					{m.about_team_title()}
@@ -204,7 +204,7 @@
 		class="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-6 px-4 py-20 sm:px-8 lg:px-14"
 	>
 		<h2
-			class="m-0 text-4xl font-extrabold uppercase lg:text-7xl"
+			class="m-0 text-[clamp(1.75rem,7.5vw,2.25rem)] font-extrabold uppercase lg:text-7xl"
 			style="font-stretch:125%; letter-spacing:-0.03em; line-height:.95"
 		>
 			{m.about_cta_title()}

@@ -1,0 +1,34 @@
+<% content_for :title, "Zapytanie — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Zapytania", admin_inquiries_path, style: "text-decoration:none" %> / <%= @inquiry.name %></div>
+    <h1><%= @inquiry.name %></h1>
+  </div>
+  <div class="actions">
+    <% if @inquiry.status_archived? %>
+      <%= button_to "Przywróć", admin_inquiry_path(@inquiry, status: "read"), method: :patch, class: "btn btn-sm" %>
+    <% else %>
+      <%= button_to "Archiwizuj", admin_inquiry_path(@inquiry, status: "archived"), method: :patch, class: "btn btn-sm" %>
+    <% end %>
+    <%= button_to "Usuń", admin_inquiry_path(@inquiry), method: :delete, class: "btn btn-sm btn-danger",
+          form: { data: { turbo_confirm: "Usunąć to zapytanie na stałe?" } } %>
+  </div>
+</div>
+
+<div class="card" style="max-width:720px">
+  <table class="table" style="margin:0">
+    <tbody>
+      <tr><th style="width:180px">Status</th><td><span class="badge <%= @inquiry.status %>"><%= @inquiry.status %></span></td></tr>
+      <tr><th>E-mail</th><td><%= mail_to @inquiry.email %></td></tr>
+      <tr><th>Telefon</th><td class="mono"><%= @inquiry.phone.presence || "—" %></td></tr>
+      <tr><th>Lokalizacja</th><td><%= @inquiry.place.presence || "—" %></td></tr>
+      <tr><th>Rodzaj</th><td><%= @inquiry.inquiry_type.presence || "—" %></td></tr>
+      <tr><th>Język</th><td class="mono"><%= @inquiry.locale %></td></tr>
+      <tr><th>Otrzymano</th><td class="mono"><%= @inquiry.created_at.strftime("%d.%m.%Y %H:%M") %></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="font-size:16px;margin:24px 0 8px">Wiadomość</h2>
+  <p style="white-space:pre-line;line-height:1.6;margin:0"><%= @inquiry.message.presence || "(brak treści)" %></p>
+</div>

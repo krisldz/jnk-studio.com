@@ -9,8 +9,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :projects, only: %i[index show], param: :slug
-      # Formularz kontaktowy i strony dołączą w kolejnych etapach:
-      # resources :inquiries, only: :create
+      resources :inquiries, only: :create
+      # Strony statyczne dołączą w kolejnym etapie:
       # resources :pages, only: :show, param: :key
     end
   end
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       member { patch :publish }
     end
     resources :categories, except: :show
+    resources :inquiries, only: %i[index show update destroy]
   end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)

@@ -1,0 +1,40 @@
+<% content_for :title, "Zapytania — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono">Zapytania</div>
+    <h1>Formularz kontaktowy</h1>
+  </div>
+</div>
+
+<% if @inquiries.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Od</th>
+        <th>Rodzaj</th>
+        <th>Wiadomość</th>
+        <th>Data</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inquiries.each do |inquiry| %>
+        <tr>
+          <td>
+            <%= link_to admin_inquiry_path(inquiry), style: "text-decoration:none;font-weight:700" do %>
+              <%= inquiry.name %>
+            <% end %>
+            <div class="mono muted" style="font-size:11px"><%= inquiry.email %></div>
+          </td>
+          <td class="muted"><%= inquiry.inquiry_type.presence || "—" %></td>
+          <td class="muted"><%= truncate(inquiry.message.to_s, length: 60) %></td>
+          <td class="mono muted"><%= inquiry.created_at.strftime("%d.%m.%Y") %></td>
+          <td><span class="badge <%= inquiry.status %>"><%= inquiry.status %></span></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty">Brak zapytań. Formularz na stronie <strong>/kontakt</strong> zapisuje je tutaj.</div>
+<% end %>

@@ -1,0 +1,13 @@
+<h1 style="font-family:sans-serif">Nowe zapytanie z formularza</h1>
+
+<table style="font-family:sans-serif;border-collapse:collapse" cellpadding="6">
+  <tr><td><strong>Imię i nazwisko</strong></td><td><%= @inquiry.name %></td></tr>
+  <tr><td><strong>E-mail</strong></td><td><%= mail_to @inquiry.email %></td></tr>
+  <tr><td><strong>Telefon</strong></td><td><%= @inquiry.phone.presence || "—" %></td></tr>
+  <tr><td><strong>Lokalizacja</strong></td><td><%= @inquiry.place.presence || "—" %></td></tr>
+  <tr><td><strong>Rodzaj</strong></td><td><%= @inquiry.inquiry_type.presence || "—" %></td></tr>
+  <tr><td><strong>Język</strong></td><td><%= @inquiry.locale %></td></tr>
+</table>
+
+<h2 style="font-family:sans-serif">Wiadomość</h2>
+<p style="font-family:sans-serif;white-space:pre-line"><%= @inquiry.message.presence || "(brak treści)" %></p>

@@ -33,7 +33,7 @@
 
 		<div class="flex flex-wrap items-end gap-10">
 			<h1
-				class="m-0 min-w-0 flex-[3_1_640px] text-6xl font-extrabold uppercase lg:text-[8.4vw]"
+				class="m-0 min-w-0 flex-[3_1_640px] text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[8.4vw]"
 				style="font-stretch:125%; letter-spacing:-0.035em; line-height:.9"
 			>
 				{m.home_hero_pre()}
@@ -100,7 +100,7 @@
 					{m.home_projects_sheet()}
 				</div>
 				<h2
-					class="lines m-0 text-5xl font-extrabold uppercase lg:text-8xl"
+					class="lines m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-8xl"
 					style="font-stretch:125%; letter-spacing:-0.03em; line-height:.92"
 				>
 					{m.home_projects_title()}
@@ -183,7 +183,7 @@
 			<div>
 				<div class="mono mb-5 text-xs uppercase">{m.home_offer_sheet()}</div>
 				<h2
-					class="lines m-0 text-5xl font-extrabold uppercase lg:text-8xl"
+					class="lines m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-8xl"
 					style="font-stretch:125%; letter-spacing:-0.03em; line-height:.92"
 				>
 					{m.home_offer_title()}
@@ -225,7 +225,7 @@
 		class="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-8 px-4 py-24 sm:px-8 lg:px-14 lg:py-28"
 	>
 		<h2
-			class="lines m-0 text-5xl font-extrabold uppercase lg:text-7xl"
+			class="lines m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-7xl"
 			style="font-stretch:125%; letter-spacing:-0.035em; line-height:.9"
 		>
 			{m.home_contact_title()}

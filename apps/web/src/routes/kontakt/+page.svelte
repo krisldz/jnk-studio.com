@@ -1,5 +1,10 @@
 <script lang="ts">
 	import { m } from '#lib/paraglide/messages.js';
+	import { enhance } from '$app/forms';
+	import { untrack } from 'svelte';
+	import type { ActionData } from './$types';
+
+	let { form }: { form: ActionData } = $props();
 
 	const types = $derived([
 		{ id: 'dom', label: m.contact_type_dom() },
@@ -9,14 +14,25 @@
 		{ id: 'inne', label: m.contact_type_inne() }
 	]);
 
-	let selectedType = $state('dom');
-	let sent = $state(false);
+	// Dane początkowe pól — wypełniane z wyniku serwera przy odświeżeniu bez JS
+	// (fallback progresywny); przy JS lokalny stan po prostu trwa między re-renderami.
+	const initial = untrack(() => (form && 'values' in form ? form.values : undefined));
 
-	// TODO(etap formularza): podmienić na POST /api/v1/inquiries (Solid Queue + e-mail).
-	function handleSubmit(event: SubmitEvent) {
-		event.preventDefault();
-		sent = true;
-	}
+	let fields = $state({
+		name: initial?.name ?? '',
+		email: initial?.email ?? '',
+		phone: initial?.phone ?? '',
+		place: initial?.place ?? '',
+		message: initial?.message ?? ''
+	});
+	let selectedType = $state(initial?.inquiry_type || 'dom');
+	let submitting = $state(false);
+	let dismissed = $state(false);
+
+	// Stan pochodny z wyniku akcji serwerowej (POST /api/v1/inquiries przez +page.server.ts).
+	const sent = $derived(!!(form && 'success' in form && form.success) && !dismissed);
+	const invalid = $derived(!!(form && 'invalid' in form && form.invalid));
+	const serverError = $derived(!!(form && 'serverError' in form && form.serverError));
 </script>
 
 <svelte:head>
@@ -35,7 +51,7 @@
 				<span>{m.contact_reply()}</span>
 			</div>
 			<h1
-				class="m-0 mb-20 text-6xl font-extrabold uppercase lg:text-[9vw]"
+				class="m-0 mb-20 text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[9vw]"
 				style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 			>
 				{m.contact_hero_1()}<br /><span style="color: var(--color-accent)"
@@ -58,7 +74,7 @@
 								aria-hidden="true">✓</span
 							>
 							<h2
-								class="m-0 text-5xl font-extrabold uppercase"
+								class="m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase"
 								style="font-stretch:125%; line-height:.95"
 							>
 								{m.contact_sent_title()}
@@ -70,11 +86,22 @@
 								type="button"
 								class="mono rounded-full border px-6 py-4 text-xs uppercase"
 								style="background: transparent; color: var(--color-light); border-color: var(--color-light); cursor: pointer"
-								onclick={() => (sent = false)}>{m.contact_sent_again()}</button
+								onclick={() => (dismissed = true)}>{m.contact_sent_again()}</button
 							>
 						</div>
 					{:else}
-						<form class="flex flex-col gap-9" onsubmit={handleSubmit}>
+						<form
+							method="POST"
+							class="flex flex-col gap-9"
+							use:enhance={() => {
+								submitting = true;
+								return async ({ update }) => {
+									await update();
+									submitting = false;
+								};
+							}}
+						>
+							<input type="hidden" name="inquiry_type" value={selectedType} />
 							<fieldset class="m-0 min-w-0 border-0 p-0">
 								<legend
 									class="mono mb-4 p-0 text-xs uppercase"
@@ -99,26 +126,38 @@
 							<div class="flex flex-wrap gap-8">
 								<label class="field mono flex flex-[1_1_220px] flex-col gap-1 text-xs uppercase">
 									<span style="color: var(--color-muted-light)">{m.contact_f_name()}</span>
-									<input type="text" name="name" autocomplete="name" required />
+									<input
+										type="text"
+										name="name"
+										autocomplete="name"
+										required
+										bind:value={fields.name}
+									/>
 								</label>
 								<label class="field mono flex flex-[1_1_220px] flex-col gap-1 text-xs uppercase">
 									<span style="color: var(--color-muted-light)">{m.contact_f_email()}</span>
-									<input type="email" name="email" autocomplete="email" required />
+									<input
+										type="email"
+										name="email"
+										autocomplete="email"
+										required
+										bind:value={fields.email}
+									/>
 								</label>
 							</div>
 							<div class="flex flex-wrap gap-8">
 								<label class="field mono flex flex-[1_1_220px] flex-col gap-1 text-xs uppercase">
 									<span style="color: var(--color-muted-light)">{m.contact_f_phone()}</span>
-									<input type="tel" name="phone" autocomplete="tel" />
+									<input type="tel" name="phone" autocomplete="tel" bind:value={fields.phone} />
 								</label>
 								<label class="field mono flex flex-[1_1_220px] flex-col gap-1 text-xs uppercase">
 									<span style="color: var(--color-muted-light)">{m.contact_f_place()}</span>
-									<input type="text" name="place" />
+									<input type="text" name="place" bind:value={fields.place} />
 								</label>
 							</div>
 							<label class="field mono flex flex-col gap-1 text-xs uppercase">
 								<span style="color: var(--color-muted-light)">{m.contact_f_message()}</span>
-								<textarea name="message" rows="4"></textarea>
+								<textarea name="message" rows="4" bind:value={fields.message}></textarea>
 							</label>
 							<label
 								class="mono flex items-start gap-3 text-xs"
@@ -132,11 +171,18 @@
 								/>
 								{m.contact_rodo()}
 							</label>
+							{#if invalid || serverError}
+								<p class="mono m-0 text-xs" role="alert" style="color: var(--color-accent)">
+									{serverError ? m.contact_error_server() : m.contact_error()}
+								</p>
+							{/if}
 							<button
 								type="submit"
+								disabled={submitting}
 								class="mono self-start rounded-full px-8 py-5 text-sm font-medium uppercase"
-								style="background: var(--color-accent); color: var(--color-ink); border:0; cursor:pointer"
-								>{m.contact_send()}</button
+								style="background: var(--color-accent); color: var(--color-ink); border:0; cursor:pointer; opacity:{submitting
+									? '0.6'
+									: '1'}">{submitting ? m.contact_sending() : m.contact_send()}</button
 							>
 						</form>
 					{/if}

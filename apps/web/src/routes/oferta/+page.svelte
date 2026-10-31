@@ -58,7 +58,7 @@
 		</div>
 		<div class="flex flex-wrap items-end gap-x-14 gap-y-8">
 			<h1
-				class="lines m-0 w-full text-6xl font-extrabold uppercase lg:text-[8.6vw]"
+				class="lines m-0 w-full text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[8.6vw]"
 				style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 			>
 				{m.offer_hero()}
@@ -129,7 +129,7 @@
 			{m.offer_process_kicker()}
 		</div>
 		<h2
-			class="lines m-0 mb-16 text-4xl font-extrabold uppercase lg:text-8xl"
+			class="lines m-0 mb-16 text-[clamp(1.75rem,7.5vw,2.25rem)] font-extrabold uppercase lg:text-8xl"
 			style="font-stretch:125%; letter-spacing:-0.03em; line-height:.92"
 		>
 			{m.offer_process_title()}
@@ -164,7 +164,7 @@
 				{m.offer_faq_kicker()}
 			</div>
 			<h2
-				class="lines m-0 text-4xl font-extrabold uppercase lg:text-6xl"
+				class="lines m-0 text-[clamp(1.75rem,7.5vw,2.25rem)] font-extrabold uppercase lg:text-6xl"
 				style="font-stretch:125%; letter-spacing:-0.03em; line-height:.95"
 			>
 				{m.offer_faq_title()}
@@ -198,7 +198,7 @@
 		class="mx-auto flex max-w-[1440px] flex-wrap items-end justify-between gap-8 px-4 py-24 sm:px-8 lg:px-14"
 	>
 		<h2
-			class="lines m-0 text-5xl font-extrabold uppercase lg:text-8xl"
+			class="lines m-0 text-[clamp(1.75rem,7.5vw,3rem)] font-extrabold uppercase lg:text-8xl"
 			style="font-stretch:125%; letter-spacing:-0.035em; line-height:.9"
 		>
 			{m.offer_cta_title_1()}

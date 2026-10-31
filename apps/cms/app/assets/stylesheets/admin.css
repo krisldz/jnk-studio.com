@@ -203,6 +203,15 @@ a {
   background: var(--ink);
   color: var(--light);
 }
+/* Statusy zapytań kontaktowych. */
+.badge.new {
+  background: var(--accent);
+}
+.badge.read {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--line);
+}
 
 /* ——— Buttons ——— */
 .btn {
