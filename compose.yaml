@@ -1,0 +1,80 @@
+# Środowisko developerskie — jeden `docker compose up` stawia całość.
+# Jedna domena: http://localhost:8080 (proxy). Mailpit UI: http://localhost:8025.
+name: jnk-studio
+
+services:
+  proxy:
+    image: caddy:2
+    ports:
+      - "8080:80"
+    volumes:
+      - ./infra/caddy/Caddyfile.dev:/etc/caddy/Caddyfile:ro
+    depends_on:
+      - web
+      - backend
+
+  web:
+    build:
+      context: ./apps/web
+      target: dev
+    command: pnpm dev --host 0.0.0.0 --port 5173
+    environment:
+      API_INTERNAL_URL: ${API_INTERNAL_URL:-http://backend:3000/api/v1}
+      API_TOKEN: ${API_TOKEN}
+      ORIGIN: ${ORIGIN:-http://localhost:8080}
+    volumes:
+      - ./apps/web:/app
+      - web_node_modules:/app/node_modules
+    depends_on:
+      - backend
+
+  backend: &rails
+    build:
+      context: ./apps/cms
+      target: dev
+    command: bin/rails server -b 0.0.0.0 -p 3000
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER:-jnk}:${POSTGRES_PASSWORD:-jnk}@db:5432/${POSTGRES_DB:-jnk_development}
+      RAILS_ENV: development
+      API_TOKEN: ${API_TOKEN}
+      SMTP_ADDRESS: ${SMTP_ADDRESS:-mail}
+      SMTP_PORT: ${SMTP_PORT:-1025}
+    volumes:
+      - ./apps/cms:/rails
+      - bundle:/usr/local/bundle
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Solid Queue (jobs) wraca wraz z formularzem kontaktowym / mailingiem.
+  # W szkielecie dev używa adaptera :async, więc osobny proces nie jest potrzebny.
+  # jobs:
+  #   <<: *rails
+  #   command: bin/jobs
+  #   depends_on:
+  #     db: { condition: service_healthy }
+  #     backend: { condition: service_started }
+
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-jnk}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-jnk}
+      POSTGRES_DB: ${POSTGRES_DB:-jnk_development}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "${POSTGRES_USER:-jnk}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  mail:
+    image: axllent/mailpit
+    ports:
+      - "8025:8025"
+
+volumes:
+  pgdata: {}
+  bundle: {}
+  web_node_modules: {}

@@ -1,0 +1,38 @@
+# Dev: jedna domena na http://localhost:8080 (proxy słucha na :80, mapowane w compose).
+# Routing ścieżek zgodnie z dokumentacją: /admin, /api, /rails, /assets → Rails; reszta → SvelteKit.
+{
+	admin off
+	auto_https off
+}
+
+:80 {
+	encode zstd gzip
+
+	# Panel CMS (Hotwire), sesja cookie
+	handle /admin/* {
+		reverse_proxy backend:3000
+	}
+
+	# Publiczne JSON API (read-only) + endpoint formularza
+	handle /api/* {
+		reverse_proxy backend:3000
+	}
+
+	# Obrazy i warianty Active Storage (docelowo za CDN)
+	handle /rails/* {
+		reverse_proxy backend:3000
+	}
+
+	# Zasoby panelu CMS (propshaft / importmap) i healthcheck Rails
+	handle /assets/* {
+		reverse_proxy backend:3000
+	}
+	handle /up {
+		reverse_proxy backend:3000
+	}
+
+	# Strona publiczna SSR (SvelteKit + Vite HMR). WebSocket HMR przechodzi automatycznie.
+	handle {
+		reverse_proxy web:5173
+	}
+}

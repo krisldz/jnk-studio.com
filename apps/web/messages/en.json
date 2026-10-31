@@ -1,0 +1,13 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"nav_projects": "Projects",
+	"projects_title": "Projects",
+	"projects_lead": "Selected studio work — architecture and interiors.",
+	"projects_empty": "Projects will appear here soon.",
+	"view_project": "View project",
+	"back_to_projects": "All projects",
+	"label_year": "Year",
+	"label_area": "Area",
+	"label_location": "Location",
+	"lang_switch": "PL"
+}

@@ -1,0 +1,19 @@
+{
+	"name": "jnk-studio",
+	"private": true,
+	"version": "0.0.0",
+	"description": "JNK Studio — wielojęzyczna strona portfolio (SvelteKit) + CMS (Rails). Monorepo.",
+	"packageManager": "pnpm@11.1.2",
+	"engines": {
+		"node": ">=24"
+	},
+	"scripts": {
+		"dev": "pnpm --filter web dev",
+		"build": "pnpm --filter web build",
+		"check": "pnpm --filter web check",
+		"lint": "pnpm --filter web lint",
+		"format": "pnpm --filter web format",
+		"test:web": "pnpm --filter web test:unit -- --run",
+		"e2e": "pnpm --filter web test:e2e"
+	}
+}

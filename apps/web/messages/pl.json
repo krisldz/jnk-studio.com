@@ -1,0 +1,13 @@
+{
+	"$schema": "https://inlang.com/schema/inlang-message-format",
+	"nav_projects": "Projekty",
+	"projects_title": "Realizacje",
+	"projects_lead": "Wybrane projekty pracowni — architektura i wnętrza.",
+	"projects_empty": "Wkrótce pojawią się tutaj realizacje.",
+	"view_project": "Zobacz realizację",
+	"back_to_projects": "Wszystkie realizacje",
+	"label_year": "Rok",
+	"label_area": "Powierzchnia",
+	"label_location": "Lokalizacja",
+	"lang_switch": "EN"
+}

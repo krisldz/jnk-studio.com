@@ -1,0 +1,57 @@
+@import 'tailwindcss';
+
+/* Tokeny designu JNK Studio (metafora arkusza projektowego). Tailwind 4 @theme. */
+@theme {
+	--color-paper: #eeede7;
+	--color-ink: #231f20;
+	--color-ink-900: #161514;
+	--color-light: #f5f4ee;
+	--color-accent: #b2db18;
+	--color-muted: #5e5c57;
+	--color-muted-2: #6a6862;
+	--color-muted-light: #a8a69f;
+
+	--font-sans: 'Archivo', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+:root {
+	color-scheme: light;
+}
+
+body {
+	margin: 0;
+	background: var(--color-paper);
+	color: var(--color-ink);
+	font-family: var(--font-sans);
+}
+
+a {
+	color: inherit;
+}
+
+/* Etykiety monospace (numeracja arkusza, metadane). */
+.mono {
+	font-family: var(--font-mono);
+	letter-spacing: 0.02em;
+}
+
+/* Papierowa siatka tła. */
+.paper-grid {
+	background-color: var(--color-paper);
+	background-image:
+		linear-gradient(rgba(35, 31, 32, 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(35, 31, 32, 0.06) 1px, transparent 1px);
+	background-size: 24px 24px;
+}
+
+/* Zastępcze kafle zdjęć (jasne / ciemne) — kreskowanie jak w makiecie. */
+.ph {
+	background:
+		repeating-linear-gradient(135deg, transparent 0 11px, rgba(35, 31, 32, 0.14) 11px 12px), #deddd5;
+}
+.ph-d {
+	background:
+		repeating-linear-gradient(135deg, transparent 0 11px, rgba(245, 244, 238, 0.1) 11px 12px),
+		#22211f;
+}

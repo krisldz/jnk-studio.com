@@ -1,0 +1,33 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /apps/web
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      svelte:
+        patterns: ["svelte", "@sveltejs/*", "vite", "@tailwindcss/*", "tailwindcss"]
+
+  - package-ecosystem: bundler
+    directory: /apps/cms
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    groups:
+      rails:
+        patterns: ["rails", "actin*", "active*", "solid_*", "propshaft", "turbo-rails", "stimulus-rails"]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: docker
+    directory: /apps/web
+    schedule:
+      interval: weekly
+  - package-ecosystem: docker
+    directory: /apps/cms
+    schedule:
+      interval: weekly

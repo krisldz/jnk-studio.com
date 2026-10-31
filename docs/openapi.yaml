@@ -1,0 +1,130 @@
+openapi: 3.1.0
+info:
+  title: JNK Studio — publiczne API
+  version: 0.1.0
+  description: >
+    Read-only JSON API konsumowane przez SvelteKit (server-side). Źródło typów TS
+    dla apps/web/src/lib/api (openapi-typescript). Autoryzacja tokenem serwisowym.
+servers:
+  - url: /api/v1
+security:
+  - serviceToken: []
+paths:
+  /projects:
+    get:
+      summary: Lista opublikowanych realizacji
+      parameters:
+        - $ref: "#/components/parameters/Locale"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [locale, projects]
+                properties:
+                  locale: { $ref: "#/components/schemas/Locale" }
+                  projects:
+                    type: array
+                    items: { $ref: "#/components/schemas/ProjectSummary" }
+  /projects/{slug}:
+    get:
+      summary: Szczegół realizacji (po slugu w danym języku)
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema: { type: string }
+        - $ref: "#/components/parameters/Locale"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ProjectDetail" }
+        "404":
+          description: Nie znaleziono
+components:
+  securitySchemes:
+    serviceToken:
+      type: http
+      scheme: bearer
+  parameters:
+    Locale:
+      name: locale
+      in: query
+      required: false
+      schema: { $ref: "#/components/schemas/Locale" }
+  schemas:
+    Locale:
+      type: string
+      enum: [pl, en]
+    CategoryRef:
+      type: object
+      required: [slug, name]
+      properties:
+        slug: { type: string }
+        name: { type: string }
+    Cover:
+      type: object
+      required: [url]
+      properties:
+        alt: { type: [string, "null"] }
+        width: { type: [integer, "null"] }
+        height: { type: [integer, "null"] }
+        url: { type: string }
+        sources:
+          type: array
+          items:
+            type: object
+            required: [width, url]
+            properties:
+              width: { type: integer }
+              url: { type: string }
+    ProjectSummary:
+      type: object
+      required: [slug, alternates, title, lead, featured]
+      properties:
+        slug: { type: string }
+        alternates:
+          type: object
+          additionalProperties: { type: string }
+        title: { type: string }
+        lead: { type: string }
+        year: { type: [integer, "null"] }
+        location: { type: [string, "null"] }
+        area_m2: { type: [integer, "null"] }
+        featured: { type: boolean }
+        category:
+          oneOf:
+            - $ref: "#/components/schemas/CategoryRef"
+            - type: "null"
+        cover:
+          oneOf:
+            - $ref: "#/components/schemas/Cover"
+            - type: "null"
+    ProjectDetail:
+      allOf:
+        - $ref: "#/components/schemas/ProjectSummary"
+        - type: object
+          required: [blocks, seo]
+          properties:
+            body: { type: [string, "null"] }
+            blocks:
+              type: array
+              items:
+                type: object
+                required: [kind]
+                properties:
+                  kind: { type: string }
+                  alt: { type: [string, "null"] }
+                  credit: { type: [string, "null"] }
+                  url: { type: string }
+                  html: { type: string }
+            seo:
+              type: object
+              required: [title, description]
+              properties:
+                title: { type: string }
+                description: { type: string }

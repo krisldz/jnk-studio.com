@@ -1,0 +1,21 @@
+# Sekrety i środowisko
+.env
+.env.*
+!.env.example
+
+# System
+.DS_Store
+*.log
+
+# Docker
+.docker/
+
+# Caddy (dane lokalne proxy, jeśli montowane)
+infra/caddy/data/
+infra/caddy/config/
+
+# Kopie zapasowe bazy
+backups/
+
+# Zależności (apps/* mają własne .gitignore na node_modules / tmp / log)
+node_modules/

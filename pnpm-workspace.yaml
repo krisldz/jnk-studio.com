@@ -1,0 +1,6 @@
+packages:
+  - "apps/web"
+
+# Pozwól na skrypty build zaufanych pakietów (pnpm 10+).
+allowBuilds:
+  esbuild: true
