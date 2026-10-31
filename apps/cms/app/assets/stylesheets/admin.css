@@ -64,6 +64,7 @@ a {
 .topnav {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 6px 22px;
   font-size: 12px;
   text-transform: uppercase;
