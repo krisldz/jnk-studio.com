@@ -1,0 +1,10 @@
+<% content_for :title, "Nowa realizacja — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Realizacje", admin_projects_path, style: "text-decoration:none" %> / Nowa</div>
+    <h1>Nowa realizacja</h1>
+  </div>
+</div>
+
+<%= render "form", project: @project, submit_label: "Utwórz realizację" %>

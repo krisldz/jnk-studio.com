@@ -46,6 +46,19 @@ module Translatable
           end
         end
 
+        # Akcesory per-język (np. title_pl / title_en) — wygodne w formularzach.
+        I18n.available_locales.each do |locale|
+          define_method("#{attribute}_#{locale}") do
+            (read_attribute(attribute) || {})[locale.to_s]
+          end
+
+          define_method("#{attribute}_#{locale}=") do |value|
+            current = (read_attribute(attribute) || {}).dup
+            current[locale.to_s] = value
+            write_attribute(attribute, current)
+          end
+        end
+
         # Wymagany domyślny język (PL).
         validate do
           translations = read_attribute(attribute) || {}

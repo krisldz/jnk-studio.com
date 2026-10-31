@@ -1,0 +1,50 @@
+<%= form_with model: [:admin, category], class: "form" do |f| %>
+  <% if category.errors.any? %>
+    <div class="errors">
+      <strong><%= pluralize(category.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>
+      <ul>
+        <% category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Nazwa</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane</span>
+        <%= f.text_field :name_pl, value: category.name_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN</span>
+        <%= f.text_field :name_en, value: category.name_en %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Slug</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane · np. domy-jednorodzinne</span>
+        <%= f.text_field :slug_pl, value: category.slug_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN · np. houses</span>
+        <%= f.text_field :slug_en, value: category.slug_en %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field" style="max-width:200px">
+    <%= f.label :position, "Kolejność" %>
+    <%= f.number_field :position, value: category.position %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit submit_label, class: "btn btn-accent" %>
+    <%= link_to "Anuluj", admin_categories_path, class: "btn" %>
+  </div>
+<% end %>

@@ -1,0 +1,42 @@
+<% content_for :title, "Kategorie — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono">Kategorie</div>
+    <h1>Kategorie</h1>
+  </div>
+  <%= link_to "Nowa kategoria", new_admin_category_path, class: "btn btn-accent" %>
+</div>
+
+<% if @categories.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Nazwa (PL)</th>
+        <th>Nazwa (EN)</th>
+        <th>Slug</th>
+        <th>Realizacji</th>
+        <th style="text-align:right">Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td style="font-weight:700"><%= category.name(:pl) || "—" %></td>
+          <td class="muted"><%= category.name_en || "—" %></td>
+          <td class="mono muted"><%= category.slug_pl || "—" %></td>
+          <td class="mono"><%= category.projects.count %></td>
+          <td>
+            <div class="actions" style="justify-content:flex-end">
+              <%= link_to "Edytuj", edit_admin_category_path(category), class: "btn btn-sm" %>
+              <%= button_to "Usuń", admin_category_path(category), method: :delete, class: "btn btn-sm btn-danger",
+                    form: { data: { turbo_confirm: "Usunąć tę kategorię?" } } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty">Brak kategorii. <%= link_to "Dodaj pierwszą", new_admin_category_path %>.</div>
+<% end %>

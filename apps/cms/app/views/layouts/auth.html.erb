@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <title><%= content_for(:title) || "Logowanie — JNK Studio" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+  </head>
+
+  <body class="admin">
+    <main class="auth">
+      <div class="auth-card">
+        <% if flash[:alert] %>
+          <div class="flash-in alert" style="margin-bottom:24px"><%= flash[:alert] %></div>
+        <% end %>
+        <% if flash[:notice] %>
+          <div class="flash-in notice" style="margin-bottom:24px"><%= flash[:notice] %></div>
+        <% end %>
+        <%= yield %>
+      </div>
+    </main>
+  </body>
+</html>

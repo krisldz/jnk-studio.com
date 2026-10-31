@@ -3,6 +3,9 @@
 {$APP_HOST} {
 	encode zstd gzip
 
+	handle /admin {
+		reverse_proxy backend:3000
+	}
 	handle /admin/* {
 		reverse_proxy backend:3000
 	}

@@ -1,0 +1,56 @@
+<% content_for :title, "Realizacje — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono">Realizacje</div>
+    <h1>Realizacje</h1>
+  </div>
+  <%= link_to "Nowa realizacja", new_admin_project_path, class: "btn btn-accent" %>
+</div>
+
+<% if @projects.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Tytuł</th>
+        <th>Kategoria</th>
+        <th>Status</th>
+        <th>Rok</th>
+        <th style="text-align:right">Akcje</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @projects.each do |project| %>
+        <tr>
+          <td>
+            <% if project.cover.attached? %>
+              <%= image_tag project.cover.variant(resize_to_fill: [128, 88]), class: "thumb" %>
+            <% else %>
+              <span class="thumb ph"></span>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to project.title(:pl) || "(bez tytułu)", edit_admin_project_path(project),
+                  style: "text-decoration:none;font-weight:700" %>
+            <% if project.featured? %><span class="mono muted" style="font-size:10px"> ★ wyróżniona</span><% end %>
+          </td>
+          <td class="muted"><%= project.category&.name(:pl) || "—" %></td>
+          <td><span class="badge <%= project.status %>"><%= project.status %></span></td>
+          <td class="mono"><%= project.year || "—" %></td>
+          <td>
+            <div class="actions" style="justify-content:flex-end">
+              <%= button_to (project.published? ? "Ukryj" : "Publikuj"), publish_admin_project_path(project),
+                    method: :patch, class: "btn btn-sm" %>
+              <%= link_to "Edytuj", edit_admin_project_path(project), class: "btn btn-sm" %>
+              <%= button_to "Usuń", admin_project_path(project), method: :delete, class: "btn btn-sm btn-danger",
+                    form: { data: { turbo_confirm: "Usunąć tę realizację?" } } %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty">Brak realizacji. <%= link_to "Dodaj pierwszą", new_admin_project_path %>.</div>
+<% end %>

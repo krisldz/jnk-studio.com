@@ -1,0 +1,60 @@
+<% content_for :title, "Pulpit — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono">Pulpit</div>
+    <h1>Przegląd</h1>
+  </div>
+  <div class="actions">
+    <%= link_to "Nowa realizacja", new_admin_project_path, class: "btn btn-accent" %>
+  </div>
+</div>
+
+<div class="grid">
+  <div class="card">
+    <div class="stat"><%= @projects_count %></div>
+    <div class="stat-label">Realizacji łącznie</div>
+  </div>
+  <div class="card">
+    <div class="stat"><%= @published_count %></div>
+    <div class="stat-label">Opublikowanych</div>
+  </div>
+  <div class="card">
+    <div class="stat"><%= @draft_count %></div>
+    <div class="stat-label">Szkiców</div>
+  </div>
+  <div class="card">
+    <div class="stat"><%= @categories_count %></div>
+    <div class="stat-label">Kategorii</div>
+  </div>
+</div>
+
+<div class="page-head" style="margin-top:48px">
+  <h1 style="font-size:24px">Ostatnie realizacje</h1>
+  <%= link_to "Wszystkie →", admin_projects_path, class: "mono muted", style: "text-decoration:none" %>
+</div>
+
+<% if @recent_projects.any? %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Tytuł</th>
+        <th>Kategoria</th>
+        <th>Status</th>
+        <th>Rok</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @recent_projects.each do |project| %>
+        <tr>
+          <td><%= link_to project.title(:pl) || "—", edit_admin_project_path(project), style: "text-decoration:none;font-weight:700" %></td>
+          <td class="muted"><%= project.category&.name(:pl) || "—" %></td>
+          <td><span class="badge <%= project.status %>"><%= project.status %></span></td>
+          <td class="mono"><%= project.year || "—" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <div class="empty">Brak realizacji. <%= link_to "Dodaj pierwszą", new_admin_project_path %>.</div>
+<% end %>

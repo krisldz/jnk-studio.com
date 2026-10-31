@@ -15,10 +15,20 @@ Rails.application.routes.draw do
     end
   end
 
-  # Panel CMS (Hotwire) pod /admin — dodawany w etapie „CMS".
-  # namespace :admin do
-  #   ...
-  # end
+  # Uwierzytelnianie panelu — pod /admin (Caddy kieruje /admin do Rails).
+  scope "/admin" do
+    resource :session, only: %i[new create destroy]
+    resources :passwords, param: :token, only: %i[new create edit update]
+  end
+
+  # Panel CMS (Hotwire) pod /admin.
+  namespace :admin do
+    root "dashboard#index"
+    resources :projects do
+      member { patch :publish }
+    end
+    resources :categories, except: :show
+  end
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest

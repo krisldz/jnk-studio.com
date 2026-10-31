@@ -1,0 +1,11 @@
+<% content_for :title, "Edycja realizacji — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Realizacje", admin_projects_path, style: "text-decoration:none" %> / Edycja</div>
+    <h1><%= @project.title(:pl) || "Realizacja" %></h1>
+  </div>
+  <span class="badge <%= @project.status %>"><%= @project.status %></span>
+</div>
+
+<%= render "form", project: @project, submit_label: "Zapisz zmiany" %>

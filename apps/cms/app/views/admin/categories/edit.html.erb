@@ -1,0 +1,10 @@
+<% content_for :title, "Edycja kategorii — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Kategorie", admin_categories_path, style: "text-decoration:none" %> / Edycja</div>
+    <h1><%= @category.name(:pl) || "Kategoria" %></h1>
+  </div>
+</div>
+
+<%= render "form", category: @category, submit_label: "Zapisz zmiany" %>

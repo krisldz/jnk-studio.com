@@ -8,7 +8,10 @@
 :80 {
 	encode zstd gzip
 
-	# Panel CMS (Hotwire), sesja cookie
+	# Panel CMS (Hotwire), sesja cookie — zarówno /admin, jak i /admin/*
+	handle /admin {
+		reverse_proxy backend:3000
+	}
 	handle /admin/* {
 		reverse_proxy backend:3000
 	}

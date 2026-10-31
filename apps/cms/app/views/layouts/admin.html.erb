@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <title><%= content_for(:title) || "Panel — JNK Studio" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+    <%= stylesheet_link_tag "admin", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body class="admin">
+    <% nav = ->(path) { request.path == path || request.path.start_with?("#{path}/") ? "active" : "" } %>
+    <header class="topbar">
+      <div class="topbar-in">
+        <a href="<%= admin_root_path %>" class="brand">JNK&nbsp;Studio <span>/ CMS</span></a>
+        <nav class="topnav mono">
+          <a href="<%= admin_root_path %>" class="<%= request.path == admin_root_path ? 'active' : '' %>">Pulpit</a>
+          <a href="<%= admin_projects_path %>" class="<%= nav.call(admin_projects_path) %>">Realizacje</a>
+          <a href="<%= admin_categories_path %>" class="<%= nav.call(admin_categories_path) %>">Kategorie</a>
+        </nav>
+        <div class="topbar-right">
+          <% if current_user %>
+            <span class="mono"><%= current_user.email_address %></span>
+          <% end %>
+          <%= button_to "Wyloguj", session_path, method: :delete, class: "btn btn-sm" %>
+        </div>
+      </div>
+    </header>
+
+    <% if flash.any? %>
+      <div class="flash">
+        <% flash.each do |type, message| %>
+          <div class="flash-in <%= type == "alert" ? "alert" : "notice" %>"><%= message %></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <main class="wrap">
+      <%= yield %>
+    </main>
+  </body>
+</html>

@@ -30,4 +30,13 @@ project.update!(
   published_at: Time.current
 )
 
-puts "Seed gotowy: #{Project.count} realizacja(e), #{Category.count} kategoria(e)."
+# Konto administratora panelu. Dane z ENV (ADMIN_EMAIL / ADMIN_PASSWORD),
+# z domyślnymi wartościami dla dev. Idempotentne.
+admin_email = ENV.fetch("ADMIN_EMAIL", "admin@jnk-studio.com")
+admin_password = ENV.fetch("ADMIN_PASSWORD", "jnkstudio123")
+admin = User.find_or_initialize_by(email_address: admin_email)
+admin.password = admin_password if admin.new_record?
+admin.save!
+
+puts "Seed gotowy: #{Project.count} realizacja(e), #{Category.count} kategoria(e), " \
+     "#{User.count} administrator(ów) (#{admin_email})."
