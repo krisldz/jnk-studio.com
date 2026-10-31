@@ -1,5 +1,5 @@
 # SvelteKit (adapter-node). Wieloetapowy: dev (HMR), build, prod (runtime Node).
-FROM node:24-slim AS base
+FROM node:25-slim AS base
 ENV PNPM_HOME=/pnpm PATH=/pnpm:$PATH
 RUN corepack enable
 WORKDIR /app
@@ -19,7 +19,7 @@ COPY . .
 RUN pnpm build && pnpm prune --prod
 
 # --- prod: minimalny runtime Node ---
-FROM node:24-slim AS prod
+FROM node:25-slim AS prod
 WORKDIR /app
 COPY --from=build /app/build ./build
 COPY --from=build /app/node_modules ./node_modules
