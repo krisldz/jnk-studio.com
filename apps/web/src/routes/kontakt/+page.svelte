@@ -51,7 +51,7 @@
 				<span>{m.contact_reply()}</span>
 			</div>
 			<h1
-				class="m-0 mb-20 text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[9vw]"
+				class="m-0 mb-20 text-[clamp(1.3rem,6.4vw,3.75rem)] font-extrabold uppercase lg:text-[clamp(4rem,7vw,6.5rem)]"
 				style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 			>
 				{m.contact_hero_1()}<br /><span style="color: var(--color-accent)"

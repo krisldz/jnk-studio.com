@@ -44,7 +44,7 @@
 			<span>{m.about_kicker()}</span>
 		</div>
 		<h1
-			class="m-0 mb-16 text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[9vw]"
+			class="m-0 mb-16 text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[clamp(5rem,9vw,9.4rem)]"
 			style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 		>
 			{m.about_hero_1()}<br /><span class="hl">{m.about_hero_mark()}</span><br />{m.about_hero_2()}

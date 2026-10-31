@@ -58,7 +58,7 @@
 		</div>
 		<div class="flex flex-wrap items-end gap-x-14 gap-y-8">
 			<h1
-				class="lines m-0 w-full text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[8.6vw]"
+				class="lines m-0 w-full text-[clamp(1.6rem,8vw,3.75rem)] font-extrabold uppercase lg:text-[clamp(5rem,8.6vw,8.3rem)]"
 				style="font-stretch:125%; letter-spacing:-0.035em; line-height:.88"
 			>
 				{m.offer_hero()}
