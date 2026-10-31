@@ -1,0 +1,10 @@
+<% content_for :title, "Nowa kategoria bloga — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Kategorie bloga", admin_post_categories_path, style: "text-decoration:none" %> / Nowa</div>
+    <h1>Nowa kategoria</h1>
+  </div>
+</div>
+
+<%= render "form", post_category: @post_category, submit_label: "Utwórz kategorię" %>

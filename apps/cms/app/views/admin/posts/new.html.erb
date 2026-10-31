@@ -1,0 +1,10 @@
+<% content_for :title, "Nowy wpis — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Blog", admin_posts_path, style: "text-decoration:none" %> / Nowy</div>
+    <h1>Nowy wpis</h1>
+  </div>
+</div>
+
+<%= render "form", post: @post, submit_label: "Utwórz wpis" %>

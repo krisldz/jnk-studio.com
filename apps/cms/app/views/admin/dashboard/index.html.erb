@@ -27,6 +27,10 @@
     <div class="stat"><%= @categories_count %></div>
     <div class="stat-label">Kategorii</div>
   </div>
+  <%= link_to admin_posts_path, class: "card", style: "text-decoration:none;color:inherit" do %>
+    <div class="stat"><%= @posts_published_count %> / <%= @posts_count %></div>
+    <div class="stat-label">Wpisów bloga (opubl. / łącznie)</div>
+  <% end %>
   <%= link_to admin_inquiries_path, class: "card", style: "text-decoration:none;color:inherit" do %>
     <div class="stat"><%= @new_inquiries_count %></div>
     <div class="stat-label">Nowych zapytań</div>

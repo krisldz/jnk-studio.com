@@ -42,7 +42,7 @@ module Admin
     end
 
     def category_params
-      params.require(:category).permit(:name_pl, :name_en, :slug_pl, :slug_en, :position)
+      params.require(:category).permit(:name_pl, :name_en, :name_de, :slug_pl, :slug_en, :slug_de, :position)
     end
   end
 end

@@ -1,0 +1,58 @@
+<%= form_with model: [:admin, post_category], url: (post_category.persisted? ? admin_post_category_path(post_category) : admin_post_categories_path), class: "form" do |f| %>
+  <% if post_category.errors.any? %>
+    <div class="errors">
+      <strong><%= pluralize(post_category.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>
+      <ul>
+        <% post_category.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Nazwa</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane</span>
+        <%= f.text_field :name_pl, value: post_category.name_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN</span>
+        <%= f.text_field :name_en, value: post_category.name_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_field :name_de, value: post_category.name_de %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Slug</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane · np. inspiracje</span>
+        <%= f.text_field :slug_pl, value: post_category.slug_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN · np. inspirations</span>
+        <%= f.text_field :slug_en, value: post_category.slug_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE · np. inspirationen</span>
+        <%= f.text_field :slug_de, value: post_category.slug_de %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field" style="max-width:200px">
+    <%= f.label :position, "Kolejność" %>
+    <%= f.number_field :position, value: post_category.position %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit submit_label, class: "btn btn-accent" %>
+    <%= link_to "Anuluj", admin_post_categories_path, class: "btn" %>
+  </div>
+<% end %>

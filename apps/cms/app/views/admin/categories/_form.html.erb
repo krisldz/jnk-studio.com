@@ -21,6 +21,10 @@
         <span class="lang-tag">EN</span>
         <%= f.text_field :name_en, value: category.name_en %>
       </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_field :name_de, value: category.name_de %>
+      </div>
     </div>
   </div>
 
@@ -34,6 +38,10 @@
       <div class="field">
         <span class="lang-tag">EN · np. houses</span>
         <%= f.text_field :slug_en, value: category.slug_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE · np. haeuser</span>
+        <%= f.text_field :slug_de, value: category.slug_de %>
       </div>
     </div>
   </div>

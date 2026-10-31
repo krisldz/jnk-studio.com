@@ -1,7 +1,7 @@
 // Typy odpowiedzi Rails API. Docelowo generowane z docs/openapi.yaml
 // (openapi-typescript); na razie utrzymywane ręcznie dla szkieletu.
 
-export type Locale = 'pl' | 'en';
+export type Locale = 'pl' | 'en' | 'de';
 
 export interface ImageSource {
 	width: number;
@@ -51,4 +51,27 @@ export interface ProjectDetail extends ProjectSummary {
 export interface ProjectsIndex {
 	locale: Locale;
 	projects: ProjectSummary[];
+}
+
+export interface PostSummary {
+	slug: string;
+	alternates: Partial<Record<Locale, string>>;
+	title: string;
+	lead: string;
+	author: string | null;
+	reading_time: number | null;
+	featured: boolean;
+	published_at: string | null;
+	category: CategoryRef | null;
+	cover: Cover | null;
+}
+
+export interface PostDetail extends PostSummary {
+	body: string | null;
+	seo: { title: string; description: string };
+}
+
+export interface PostsIndex {
+	locale: Locale;
+	posts: PostSummary[];
 }

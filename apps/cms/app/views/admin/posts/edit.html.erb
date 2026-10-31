@@ -1,0 +1,11 @@
+<% content_for :title, "Edycja wpisu — JNK Studio CMS" %>
+
+<div class="page-head">
+  <div>
+    <div class="kicker mono"><%= link_to "Blog", admin_posts_path, style: "text-decoration:none" %> / Edycja</div>
+    <h1><%= @post.title(:pl) || "Wpis" %></h1>
+  </div>
+  <span class="badge <%= @post.status %>"><%= @post.status %></span>
+</div>
+
+<%= render "form", post: @post, submit_label: "Zapisz zmiany" %>

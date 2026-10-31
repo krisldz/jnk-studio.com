@@ -15,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<title>JNK Studio — pracownia architektury i wnętrz</title>
+	<title>{m.home_meta_title()}</title>
 	<meta name="description" content={m.home_hero_lead()} />
 </svelte:head>
 

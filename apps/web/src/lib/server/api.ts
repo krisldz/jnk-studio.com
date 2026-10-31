@@ -1,6 +1,12 @@
 // Klient Rails API — WYŁĄCZNIE po stronie serwera (używa tokenu z $app/env/private).
 import { API_INTERNAL_URL, API_TOKEN } from '$app/env/private';
-import type { Locale, ProjectsIndex, ProjectDetail } from '#lib/api/types.ts';
+import type {
+	Locale,
+	ProjectsIndex,
+	ProjectDetail,
+	PostsIndex,
+	PostDetail
+} from '#lib/api/types.ts';
 
 type FetchFn = typeof globalThis.fetch;
 
@@ -22,6 +28,12 @@ export const getProjects = (fetchFn: FetchFn, locale: Locale) =>
 
 export const getProject = (fetchFn: FetchFn, slug: string, locale: Locale) =>
 	apiGet<ProjectDetail>(fetchFn, `/projects/${encodeURIComponent(slug)}`, locale);
+
+export const getPosts = (fetchFn: FetchFn, locale: Locale) =>
+	apiGet<PostsIndex>(fetchFn, '/posts', locale);
+
+export const getPost = (fetchFn: FetchFn, slug: string, locale: Locale) =>
+	apiGet<PostDetail>(fetchFn, `/posts/${encodeURIComponent(slug)}`, locale);
 
 export interface InquiryInput {
 	name: string;

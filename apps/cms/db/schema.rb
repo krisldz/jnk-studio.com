@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_31_170000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_31_180000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -67,6 +67,37 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_170000) do
     t.index ["status"], name: "index_inquiries_on_status"
   end
 
+  create_table "post_categories", force: :cascade do |t|
+    t.jsonb "name", default: {}, null: false
+    t.jsonb "slug", default: {}, null: false
+    t.integer "position", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["position"], name: "index_post_categories_on_position"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.jsonb "slug", default: {}, null: false
+    t.jsonb "title", default: {}, null: false
+    t.jsonb "lead", default: {}, null: false
+    t.jsonb "body", default: {}, null: false
+    t.string "author"
+    t.integer "reading_time"
+    t.bigint "post_category_id"
+    t.boolean "featured", default: false, null: false
+    t.integer "position", default: 0, null: false
+    t.string "status", default: "draft", null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["featured"], name: "index_posts_on_featured"
+    t.index ["position"], name: "index_posts_on_position"
+    t.index ["post_category_id"], name: "index_posts_on_post_category_id"
+    t.index ["published_at"], name: "index_posts_on_published_at"
+    t.index ["slug"], name: "index_posts_on_slug", using: :gin
+    t.index ["status"], name: "index_posts_on_status"
+  end
+
   create_table "project_images", force: :cascade do |t|
     t.bigint "project_id", null: false
     t.jsonb "alt", default: {}, null: false
@@ -119,6 +150,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_31_170000) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "posts", "post_categories"
   add_foreign_key "project_images", "projects"
   add_foreign_key "projects", "categories"
   add_foreign_key "sessions", "users"

@@ -1,7 +1,17 @@
 <script lang="ts">
 	import { m } from '#lib/paraglide/messages.js';
+	import { localizeHref } from '#lib/paraglide/runtime.js';
 
 	const year = new Date().getFullYear();
+
+	const links = $derived([
+		{ id: '/', label: m.nav_start() },
+		{ id: '/realizacje', label: m.nav_projects() },
+		{ id: '/o-nas', label: m.nav_about() },
+		{ id: '/oferta', label: m.nav_offer() },
+		{ id: '/blog', label: m.nav_blog() },
+		{ id: '/kontakt', label: m.nav_contact() }
+	]);
 </script>
 
 <footer class="section-dark border-t" style="border-color: var(--color-ink)">
@@ -29,5 +39,18 @@
 				{m.footer_rights()}
 			</div>
 		</div>
+
+		<nav
+			class="mono mt-6 flex flex-wrap gap-x-6 gap-y-2 text-xs uppercase"
+			aria-label={m.footer_nav_label()}
+		>
+			{#each links as link (link.id)}
+				<a
+					href={localizeHref(link.id)}
+					class="no-underline hover:underline"
+					style="text-underline-offset:6px">{link.label}</a
+				>
+			{/each}
+		</nav>
 	</div>
 </footer>

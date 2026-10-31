@@ -49,10 +49,10 @@ module Admin
 
     def project_params
       params.require(:project).permit(
-        :title_pl, :title_en,
-        :slug_pl, :slug_en,
-        :lead_pl, :lead_en,
-        :body_pl, :body_en,
+        :title_pl, :title_en, :title_de,
+        :slug_pl, :slug_en, :slug_de,
+        :lead_pl, :lead_en, :lead_de,
+        :body_pl, :body_en, :body_de,
         :status, :category_id, :year, :location, :area_m2,
         :featured, :position, :cover
       )

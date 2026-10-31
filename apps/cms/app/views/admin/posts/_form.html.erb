@@ -1,0 +1,141 @@
+<%= form_with model: [:admin, post], class: "form" do |f| %>
+  <% if post.errors.any? %>
+    <div class="errors">
+      <strong><%= pluralize(post.errors.count, "błąd", plural: "błędów") %> uniemożliwiły zapis:</strong>
+      <ul>
+        <% post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <label>Tytuł</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane</span>
+        <%= f.text_field :title_pl, value: post.title_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN</span>
+        <%= f.text_field :title_en, value: post.title_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_field :title_de, value: post.title_de %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Slug (adres URL)</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane · np. jak-projektujemy-wnetrza</span>
+        <%= f.text_field :slug_pl, value: post.slug_pl %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN · np. how-we-design-interiors</span>
+        <%= f.text_field :slug_en, value: post.slug_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE · np. wie-wir-innenraeume-entwerfen</span>
+        <%= f.text_field :slug_de, value: post.slug_de %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Zajawka (lead)</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane</span>
+        <%= f.text_area :lead_pl, value: post.lead_pl, rows: 3 %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN</span>
+        <%= f.text_area :lead_en, value: post.lead_en, rows: 3 %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_area :lead_de, value: post.lead_de, rows: 3 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Treść (HTML)</label>
+    <div class="lang-pair">
+      <div class="field">
+        <span class="lang-tag">PL · wymagane</span>
+        <%= f.text_area :body_pl, value: post.body_pl, rows: 12 %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">EN</span>
+        <%= f.text_area :body_en, value: post.body_en, rows: 12 %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_area :body_de, value: post.body_de, rows: 12 %>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <%= f.label :status, "Status" %>
+      <%= f.select :status, Post.statuses.keys.map { |s| [s, s] }, {}, {} %>
+    </div>
+    <div class="field">
+      <%= f.label :post_category_id, "Kategoria" %>
+      <%= f.select :post_category_id,
+            PostCategory.ordered.map { |c| [c.name(:pl), c.id] },
+            { include_blank: "— brak —" } %>
+    </div>
+    <div class="field">
+      <%= f.label :published_at, "Data publikacji" %>
+      <%= f.datetime_field :published_at, value: post.published_at&.strftime("%Y-%m-%dT%H:%M") %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field">
+      <%= f.label :author, "Autor" %>
+      <%= f.text_field :author, value: post.author %>
+    </div>
+    <div class="field">
+      <%= f.label :reading_time, "Czas czytania (min)" %>
+      <%= f.number_field :reading_time, value: post.reading_time, min: 1,
+            placeholder: "auto z treści" %>
+    </div>
+    <div class="field">
+      <%= f.label :position, "Kolejność" %>
+      <%= f.number_field :position, value: post.position %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="field" style="display:flex;flex-direction:column;justify-content:flex-end">
+      <label class="mono" style="display:flex;gap:10px;align-items:center;text-transform:none">
+        <%= f.check_box :featured, style: "width:20px;height:20px;accent-color:#b2db18" %>
+        Wyróżniony na liście bloga
+      </label>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :cover, "Okładka" %>
+    <% if post.cover.attached? %>
+      <div style="margin-bottom:12px">
+        <%= image_tag post.cover.variant(resize_to_limit: [320, 220]), style: "border:1px solid #231f20;display:block" %>
+      </div>
+    <% end %>
+    <%= f.file_field :cover, accept: "image/*" %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit submit_label, class: "btn btn-accent" %>
+    <%= link_to "Anuluj", admin_posts_path, class: "btn" %>
+  </div>
+<% end %>

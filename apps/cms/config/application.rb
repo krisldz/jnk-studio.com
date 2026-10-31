@@ -19,8 +19,8 @@ module Cms
     # --- JNK Studio ---
     config.time_zone = "Warsaw"
 
-    # Wielojęzyczność: PL domyślny, EN dodatkowy; fallback treści do PL.
-    config.i18n.available_locales = %i[pl en]
+    # Wielojęzyczność: PL domyślny, EN i DE dodatkowe; fallback treści do PL.
+    config.i18n.available_locales = %i[pl en de]
     config.i18n.default_locale = :pl
     config.i18n.fallbacks = [ :pl ]
 

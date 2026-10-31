@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :projects, only: %i[index show], param: :slug
+      resources :posts, only: %i[index show], param: :slug
       resources :inquiries, only: :create
       # Strony statyczne dołączą w kolejnym etapie:
       # resources :pages, only: :show, param: :key
@@ -28,6 +29,10 @@ Rails.application.routes.draw do
       member { patch :publish }
     end
     resources :categories, except: :show
+    resources :posts do
+      member { patch :publish }
+    end
+    resources :post_categories, except: :show
     resources :inquiries, only: %i[index show update destroy]
   end
 

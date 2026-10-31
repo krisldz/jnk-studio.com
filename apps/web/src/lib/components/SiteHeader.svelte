@@ -17,7 +17,8 @@
 		{ id: '/realizacje', n: '02', label: m.nav_projects() },
 		{ id: '/o-nas', n: '03', label: m.nav_about() },
 		{ id: '/oferta', n: '04', label: m.nav_offer() },
-		{ id: '/kontakt', n: '05', label: m.nav_contact() }
+		{ id: '/blog', n: '05', label: m.nav_blog() },
+		{ id: '/kontakt', n: '06', label: m.nav_contact() }
 	]);
 
 	function isActive(id: string): boolean {
@@ -27,8 +28,9 @@
 		return routeId === id || routeId.startsWith(`${id}/`);
 	}
 
-	const otherLocale = $derived((locales.find((l) => l !== getLocale()) ?? getLocale()) as Locale);
-	const langHref = $derived(localizeHref(page.url.pathname, { locale: otherLocale }));
+	const localeLabel: Record<Locale, string> = { pl: 'PL', en: 'EN', de: 'DE' };
+	const otherLocales = $derived(locales.filter((l) => l !== getLocale()) as Locale[]);
+	const langHref = (loc: Locale) => localizeHref(page.url.pathname, { locale: loc });
 </script>
 
 <header class="paper-grid border-b" style="border-color: var(--color-ink)">
@@ -63,12 +65,16 @@
 				class="rounded-full px-5 py-3.5 font-medium no-underline"
 				style="background: var(--color-accent)">{m.cta_talk()}</a
 			>
-			<a
-				href={langHref}
-				class="rounded-full border px-4 py-2.5 no-underline"
-				style="border-color: var(--color-ink)"
-				hreflang={otherLocale}>{m.lang_switch()}</a
-			>
+			<div class="flex items-center gap-2" aria-label={m.lang_switch()}>
+				{#each otherLocales as loc (loc)}
+					<a
+						href={langHref(loc)}
+						class="rounded-full border px-4 py-2.5 no-underline"
+						style="border-color: var(--color-ink)"
+						hreflang={loc}>{localeLabel[loc]}</a
+					>
+				{/each}
+			</div>
 		</nav>
 
 		<!-- Burger (mobile) -->
@@ -130,12 +136,14 @@
 						class="rounded-full px-6 py-4 text-sm font-medium uppercase no-underline"
 						style="background: var(--color-accent)">{m.cta_talk()}</a
 					>
-					<a
-						href={langHref}
-						class="rounded-full border px-4 py-3 text-sm no-underline"
-						style="border-color: var(--color-ink)"
-						hreflang={otherLocale}>{m.lang_switch()}</a
-					>
+					{#each otherLocales as loc (loc)}
+						<a
+							href={langHref(loc)}
+							class="rounded-full border px-4 py-3 text-sm no-underline"
+							style="border-color: var(--color-ink)"
+							hreflang={loc}>{localeLabel[loc]}</a
+						>
+					{/each}
 				</div>
 			</div>
 		</nav>

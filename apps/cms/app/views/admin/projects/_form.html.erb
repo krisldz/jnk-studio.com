@@ -21,6 +21,10 @@
         <span class="lang-tag">EN</span>
         <%= f.text_field :title_en, value: project.title_en %>
       </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_field :title_de, value: project.title_de %>
+      </div>
     </div>
   </div>
 
@@ -34,6 +38,10 @@
       <div class="field">
         <span class="lang-tag">EN · np. mokotow-apartment</span>
         <%= f.text_field :slug_en, value: project.slug_en %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE · np. wohnung-mokotow</span>
+        <%= f.text_field :slug_de, value: project.slug_de %>
       </div>
     </div>
   </div>
@@ -49,6 +57,10 @@
         <span class="lang-tag">EN</span>
         <%= f.text_area :lead_en, value: project.lead_en, rows: 3 %>
       </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_area :lead_de, value: project.lead_de, rows: 3 %>
+      </div>
     </div>
   </div>
 
@@ -62,6 +74,10 @@
       <div class="field">
         <span class="lang-tag">EN</span>
         <%= f.text_area :body_en, value: project.body_en, rows: 8 %>
+      </div>
+      <div class="field">
+        <span class="lang-tag">DE</span>
+        <%= f.text_area :body_de, value: project.body_de, rows: 8 %>
       </div>
     </div>
   </div>
