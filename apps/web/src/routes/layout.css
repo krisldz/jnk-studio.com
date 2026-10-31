@@ -10,6 +10,9 @@
 	--color-muted: #5e5c57;
 	--color-muted-2: #6a6862;
 	--color-muted-light: #a8a69f;
+	--color-dim: #d6d4cc;
+	--color-line-dark: #6e6c66;
+	--color-ink-700: #4a4844;
 
 	--font-sans: 'Archivo', system-ui, sans-serif;
 	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
@@ -34,6 +37,31 @@ a {
 .mono {
 	font-family: var(--font-mono);
 	letter-spacing: 0.02em;
+}
+
+/* Zaznaczenie marker-em w kolorze akcentu (jak w makiecie). */
+.hl {
+	background: var(--color-accent);
+	padding: 0 0.1em;
+	-webkit-box-decoration-break: clone;
+	box-decoration-break: clone;
+}
+
+/* Sekcje na ciemnym tle — linki rozjaśnione, akcent na hover. */
+.section-dark {
+	background: var(--color-ink-900);
+	color: var(--color-light);
+}
+.section-dark a {
+	color: var(--color-light);
+}
+.section-dark a:hover {
+	color: var(--color-accent);
+}
+
+/* Nagłówki wielowierszowe sterowane znakiem nowej linii z tłumaczeń. */
+.lines {
+	white-space: pre-line;
 }
 
 /* Papierowa siatka tła. */
