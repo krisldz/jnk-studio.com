@@ -62,7 +62,8 @@ module Admin
         :lead_pl, :lead_en, :lead_de,
         :body_pl, :body_en, :body_de,
         :status, :post_category_id, :author, :reading_time,
-        :featured, :position, :published_at, :cover
+        :featured, :position, :published_at, :cover,
+        :cover_credit, :cover_credit_url
       )
     end
   end

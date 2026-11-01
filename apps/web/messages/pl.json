@@ -1,6 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"nav_start": "Start",
 	"nav_projects": "Projekty",
 	"nav_about": "O nas",
@@ -11,14 +10,12 @@
 	"menu_open": "Otwórz menu",
 	"menu_close": "Zamknij menu",
 	"lang_switch": "EN",
-
 	"footer_studio_label": "Pracownia",
 	"footer_studio": "JNK Studio",
 	"footer_scale_label": "Skala",
 	"footer_scale": "1:1",
 	"footer_rights": "Wszelkie prawa zastrzeżone",
 	"footer_nav_label": "Mapa strony",
-
 	"projects_title": "Realizacje",
 	"projects_lead": "Wybrane projekty pracowni — architektura i wnętrza.",
 	"projects_empty": "Wkrótce pojawią się tutaj realizacje.",
@@ -33,7 +30,6 @@
 	"label_year": "Rok",
 	"label_area": "Powierzchnia",
 	"label_location": "Lokalizacja",
-
 	"home_meta_title": "JNK Studio — pracownia architektury i wnętrz",
 	"home_sheet": "Arkusz 01 / 05 — Start",
 	"home_city": "Pracownia architektury · [Miasto]",
@@ -62,7 +58,6 @@
 	"home_contact_title": "Zaprojektujmy\ncoś razem.",
 	"home_contact_lead": "Napisz kilka słów o projekcie — odpiszemy w ciągu jednego dnia roboczego.",
 	"home_contact_cta": "Napisz do nas ↗",
-
 	"offer_sheet": "Arkusz 04 / 05 — Oferta",
 	"offer_kicker": "Zakres usług",
 	"offer_hero": "Co dla\nCiebie\nnarysujemy",
@@ -118,7 +113,6 @@
 	"offer_cta_title_2": "w 48 h.",
 	"offer_cta_lead": "[Opisz krótko projekt — odpiszemy z orientacyjną wyceną i terminem.]",
 	"offer_cta_btn": "Zapytaj o wycenę ↗",
-
 	"about_sheet": "Arkusz 03 / 05 — O nas",
 	"about_kicker": "Pracownia · ludzie · podejście",
 	"about_hero_1": "Pracownia",
@@ -161,7 +155,6 @@
 	"about_tl4_text": "[Czym zajmujemy się teraz]",
 	"about_cta_title": "Poznajmy się.",
 	"about_cta_btn": "Umów spotkanie ↗",
-
 	"contact_sheet": "Arkusz 05 / 05 — Kontakt",
 	"contact_reply": "Odpowiadamy w ciągu 1 dnia roboczego",
 	"contact_hero_1": "Zaprojektujmy",
@@ -198,5 +191,6 @@
 	"contact_map_ph": "[Mapa dojazdu]",
 	"social_instagram": "Instagram ↗",
 	"social_facebook": "Facebook ↗",
-	"social_behance": "Behance ↗"
+	"social_behance": "Behance ↗",
+	"photo_credit": "Zdjęcie"
 }

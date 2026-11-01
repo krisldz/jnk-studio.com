@@ -127,6 +127,17 @@
     <%= f.file_field :cover, accept: "image/*" %>
   </div>
 
+  <div class="row">
+    <div class="field">
+      <%= f.label :cover_credit, "Autor okładki" %>
+      <%= f.text_field :cover_credit, value: post.cover_credit %>
+    </div>
+    <div class="field">
+      <%= f.label :cover_credit_url, "Link do autora" %>
+      <%= f.text_field :cover_credit_url, value: post.cover_credit_url %>
+    </div>
+  </div>
+
   <div class="form-actions">
     <%= f.submit submit_label, class: "btn btn-accent" %>
     <%= link_to "Anuluj", admin_posts_path, class: "btn" %>

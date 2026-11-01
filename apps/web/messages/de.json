@@ -1,6 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"nav_start": "Start",
 	"nav_projects": "Projekte",
 	"nav_about": "Über uns",
@@ -11,14 +10,12 @@
 	"menu_open": "Menü öffnen",
 	"menu_close": "Menü schließen",
 	"lang_switch": "DE",
-
 	"footer_studio_label": "Studio",
 	"footer_studio": "JNK Studio",
 	"footer_scale_label": "Maßstab",
 	"footer_scale": "1:1",
 	"footer_rights": "Alle Rechte vorbehalten",
 	"footer_nav_label": "Sitemap",
-
 	"projects_title": "Projekte",
 	"projects_lead": "Ausgewählte Projekte des Studios — Architektur und Innenräume.",
 	"projects_empty": "Projekte erscheinen hier in Kürze.",
@@ -33,7 +30,6 @@
 	"label_year": "Jahr",
 	"label_area": "Fläche",
 	"label_location": "Standort",
-
 	"home_meta_title": "JNK Studio — Studio für Architektur und Innenarchitektur",
 	"home_sheet": "Blatt 01 / 05 — Start",
 	"home_city": "Architekturbüro · [Stadt]",
@@ -62,7 +58,6 @@
 	"home_contact_title": "Entwerfen wir\netwas zusammen.",
 	"home_contact_lead": "Schreiben Sie ein paar Worte zum Projekt — wir antworten innerhalb eines Werktags.",
 	"home_contact_cta": "Schreiben Sie uns ↗",
-
 	"offer_sheet": "Blatt 04 / 05 — Leistungen",
 	"offer_kicker": "Leistungsumfang",
 	"offer_hero": "Was wir für\nSie\nzeichnen",
@@ -118,7 +113,6 @@
 	"offer_cta_title_2": "in 48 h.",
 	"offer_cta_lead": "[Beschreiben Sie kurz Ihr Projekt — wir antworten mit grobem Angebot und Termin.]",
 	"offer_cta_btn": "Angebot anfragen ↗",
-
 	"about_sheet": "Blatt 03 / 05 — Über uns",
 	"about_kicker": "Studio · Menschen · Haltung",
 	"about_hero_1": "Studio",
@@ -161,7 +155,6 @@
 	"about_tl4_text": "[Womit wir uns jetzt beschäftigen]",
 	"about_cta_title": "Lernen wir uns kennen.",
 	"about_cta_btn": "Termin vereinbaren ↗",
-
 	"contact_sheet": "Blatt 05 / 05 — Kontakt",
 	"contact_reply": "Wir antworten innerhalb von 1 Werktag",
 	"contact_hero_1": "Entwerfen wir",
@@ -198,5 +191,6 @@
 	"contact_map_ph": "[Anfahrtskarte]",
 	"social_instagram": "Instagram ↗",
 	"social_facebook": "Facebook ↗",
-	"social_behance": "Behance ↗"
+	"social_behance": "Behance ↗",
+	"photo_credit": "Foto"
 }

@@ -69,6 +69,21 @@
 
 		<div class="mt-12">
 			<ResponsiveImage cover={p.cover} ratio="3 / 2" sizes="(max-width: 1100px) 100vw, 1100px" />
+			{#if p.cover?.credit}
+				<p class="mono mt-2 text-xs" style="color: var(--color-muted)">
+					{m.photo_credit()}:
+					{#if p.cover.credit_url}
+						<a href={p.cover.credit_url} target="_blank" rel="noopener nofollow">{p.cover.credit}</a
+						>
+					{:else}{p.cover.credit}{/if}
+					/
+					<a
+						href="https://unsplash.com/?utm_source=jnk_studio&utm_medium=referral"
+						target="_blank"
+						rel="noopener nofollow">Unsplash</a
+					>
+				</p>
+			{/if}
 		</div>
 
 		{#if p.body}

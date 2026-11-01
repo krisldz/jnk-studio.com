@@ -1,6 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-
 	"nav_start": "Start",
 	"nav_projects": "Projects",
 	"nav_about": "About",
@@ -11,14 +10,12 @@
 	"menu_open": "Open menu",
 	"menu_close": "Close menu",
 	"lang_switch": "PL",
-
 	"footer_studio_label": "Studio",
 	"footer_studio": "JNK Studio",
 	"footer_scale_label": "Scale",
 	"footer_scale": "1:1",
 	"footer_rights": "All rights reserved",
 	"footer_nav_label": "Sitemap",
-
 	"projects_title": "Projects",
 	"projects_lead": "Selected studio work — architecture and interiors.",
 	"projects_empty": "Projects will appear here soon.",
@@ -33,7 +30,6 @@
 	"label_year": "Year",
 	"label_area": "Area",
 	"label_location": "Location",
-
 	"home_meta_title": "JNK Studio — architecture & interior design studio",
 	"home_sheet": "Sheet 01 / 05 — Start",
 	"home_city": "Architecture studio · [City]",
@@ -62,7 +58,6 @@
 	"home_contact_title": "Let's design\nsomething together.",
 	"home_contact_lead": "Write a few words about your project — we'll reply within one business day.",
 	"home_contact_cta": "Get in touch ↗",
-
 	"offer_sheet": "Sheet 04 / 05 — Services",
 	"offer_kicker": "Scope of services",
 	"offer_hero": "What we'll\ndraw\nfor you",
@@ -118,7 +113,6 @@
 	"offer_cta_title_2": "in 48 h.",
 	"offer_cta_lead": "[Describe the project briefly — we'll reply with an indicative quote and timeline.]",
 	"offer_cta_btn": "Ask for a quote ↗",
-
 	"about_sheet": "Sheet 03 / 05 — About",
 	"about_kicker": "Studio · people · approach",
 	"about_hero_1": "A studio",
@@ -161,7 +155,6 @@
 	"about_tl4_text": "[What we do now]",
 	"about_cta_title": "Let's meet.",
 	"about_cta_btn": "Book a meeting ↗",
-
 	"contact_sheet": "Sheet 05 / 05 — Contact",
 	"contact_reply": "We reply within 1 business day",
 	"contact_hero_1": "Let's design",
@@ -198,5 +191,6 @@
 	"contact_map_ph": "[Directions map]",
 	"social_instagram": "Instagram ↗",
 	"social_facebook": "Facebook ↗",
-	"social_behance": "Behance ↗"
+	"social_behance": "Behance ↗",
+	"photo_credit": "Photo"
 }

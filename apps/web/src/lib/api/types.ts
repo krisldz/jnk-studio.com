@@ -14,6 +14,8 @@ export interface Cover {
 	height: number | null;
 	url: string;
 	sources?: ImageSource[];
+	credit?: string | null;
+	credit_url?: string | null;
 }
 
 export interface CategoryRef {

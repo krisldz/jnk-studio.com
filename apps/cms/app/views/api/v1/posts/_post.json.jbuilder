@@ -23,6 +23,8 @@ if post.cover.attached?
     json.width blob.metadata["width"]
     json.height blob.metadata["height"]
     json.url rails_blob_path(post.cover, only_path: true)
+    json.credit post.cover_credit
+    json.credit_url post.cover_credit_url
   end
 else
   json.cover nil
