@@ -69,6 +69,7 @@
 				{#each otherLocales as loc (loc)}
 					<a
 						href={langHref(loc)}
+						data-sveltekit-reload
 						class="rounded-full border px-4 py-2.5 no-underline"
 						style="border-color: var(--color-ink)"
 						hreflang={loc}>{localeLabel[loc]}</a
@@ -139,6 +140,7 @@
 					{#each otherLocales as loc (loc)}
 						<a
 							href={langHref(loc)}
+							data-sveltekit-reload
 							class="rounded-full border px-4 py-3 text-sm no-underline"
 							style="border-color: var(--color-ink)"
 							hreflang={loc}>{localeLabel[loc]}</a
