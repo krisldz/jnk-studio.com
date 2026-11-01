@@ -7,3 +7,7 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# Generowane przez Paraglide (CI kompiluje je świeżo — nie formatujemy)
+/project.inlang/
+/src/lib/paraglide/

@@ -31,6 +31,8 @@ jobs:
         run: pnpm lint
       - name: Typy (svelte-check)
         run: pnpm check
+      - name: Przeglądarki Playwright (testy komponentów)
+        run: pnpm exec playwright install --with-deps chromium
       - name: Testy jednostkowe (Vitest)
         run: pnpm test:unit -- --run
       - name: Build
